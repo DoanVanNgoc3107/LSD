@@ -245,8 +245,8 @@
             '<header class="app-header">' +
             '<div class="brand" data-go="menu">' +
             '<div class="brand-logo">BB</div>' +
-            '<div><div class="brand-title">BrainBooster</div>' +
-            '<span class="brand-sub">Ôn luyện Lịch sử Đảng</span></div>' +
+            '<div><div class="brand-title">LSD</div>' +
+            '<span class="brand-sub">Auth: Đoàn Văn Ngọc</span></div>' +
             "</div>" +
             '<div class="header-credit">' +
             '<span class="dot"></span>' +
@@ -263,8 +263,8 @@
 
     const MODES = [
         { key: "flashcard", accent: "indigo", icon: "🃏", badge: "", title: "Lật Thẻ", desc: "Ghi nhớ thụ động. Lướt qua câu hỏi và đáp án để não bộ làm quen với dữ liệu." },
-        { key: "review", accent: "amber", icon: "🧠", badge: "Mới", title: "Ôn Tập Thông Minh", desc: "Lặp lại ngắt quãng (Leitner). Hệ thống ưu tiên câu bạn hay quên để nhớ lâu hơn." },
-        { key: "exam", accent: "cyan", icon: "📝", badge: "Mới", title: "Thi Thử", desc: "Kiểm tra chủ động theo số câu tùy chọn, chấm điểm và xem lại câu sai chi tiết." },
+        { key: "review", accent: "amber", icon: "🧠", badge: "", title: "Ôn Tập Thông Minh", desc: "Lặp lại ngắt quãng (Leitner). Hệ thống ưu tiên câu bạn hay quên để nhớ lâu hơn." },
+        { key: "exam", accent: "cyan", icon: "📝", badge: "", title: "Thi Thử", desc: "Kiểm tra chủ động theo số câu tùy chọn, chấm điểm và xem lại câu sai chi tiết." },
         { key: "survival", accent: "rose", icon: "⏱️", badge: "", title: "Thực Chiến", desc: "Rèn phản xạ dưới áp lực thời gian. Bạn chỉ có 3 mạng — sai là mất mạng!" },
         { key: "matching", accent: "emerald", icon: "🧩", badge: "Nâng cấp", title: "Ghép Cặp", desc: "Kéo đáp án bên phải nối vào câu hỏi bên trái. Đường nối hiện ngay khi kéo." }
     ];
@@ -486,7 +486,7 @@
                 "survival",
                 '<div class="panel animate-pop">' +
                 '<div class="panel__emoji">' + (cleared ? "🏆" : "💥") + "</div>" +
-                '<h2 class="panel__title">' + (cleared ? "Hoàn thành xuất sắc!" : "Hết mạng rồi!") + "</h2>" +
+                '<h2 class="panel__title">' + (cleared ? "Hoàn thành xuất sắc!" : "Hết luowtj rồi!") + "</h2>" +
                 '<p class="panel__sub">Điểm đánh giá năng lực của bạn</p>' +
                 '<div class="result__big">' + score + "</div>" +
                 '<div class="panel__actions">' +
