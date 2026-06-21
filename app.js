@@ -355,7 +355,7 @@
 
     /* §7 — SURVIVAL (TIMED QUIZ) MODE ------------------------ */
     function SurvivalMode() {
-        const MAX_MS = 20000;
+        const MAX_MS = 30000;
         let queue = shuffle(QUESTIONS);
         let pos = 0;
         let lives = 3;
