@@ -230,7 +230,19 @@
                 activeCleanup = null;
             }
             window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+            if (screen.startsWith("e") || screen.startsWith("essay")) {
+                const essayScreen = EssayApp.screens[screen];
+                if (essayScreen) {
+                    return essayScreen(shell, EssayRouter);
+                }
+            }
             (SCREENS[screen] || SCREENS.menu)();
+        }
+    };
+
+    const EssayRouter = {
+        go(screen) {
+            Router.go(screen);
         }
     };
 
@@ -271,6 +283,7 @@
 
     function MainMenu() {
         const s = SRS.stats();
+        const es = typeof EssayApp !== "undefined" ? EssayApp.stats() : { total: 10, mastered: 0 };
         const cards = MODES.map(
             (m) =>
                 '<button class="mode-card" data-accent="' + m.accent + '" data-mode="' + m.key + '">' +
@@ -293,13 +306,26 @@
             '<span class="pill">📚 Đã học: <strong>' + s.started + "</strong></span>" +
             "</div>" +
             "</div>" +
+            '<div class="section-title">📝 Trắc nghiệm</div>' +
             '<div class="mode-grid">' + cards + "</div>" +
+            '<div class="section-title" style="margin-top:2rem">✍️ Tự luận <span class="menu__count">(' + es.total + " câu)</span></div>" +
+            '<button class="mode-card mode-card--essay" data-accent="violet" id="go-essay">' +
+            '<span class="mode-card__icon">📜</span>' +
+            '<span class="mode-card__title">Học Thuộc Tự Luận</span>' +
+            '<span class="mode-card__desc">10 câu tự luận đầy đủ. Ghép từ, điền khuyết, ôn chủ động — không bỏ sót chữ nào trong đáp án.</span>' +
+            '<span class="mode-card__badge">Mới</span>' +
+            "</button>" +
+            '<div class="menu__stats" style="margin-top:0.75rem">' +
+            '<span class="pill">✅ Tự luận thuộc: <strong>' + es.mastered + "/" + es.total + "</strong></span>" +
+            "</div>" +
             "</div>"
         );
 
-        $$(".mode-card").forEach((btn) =>
+        $$(".mode-card[data-mode]").forEach((btn) =>
             btn.addEventListener("click", () => Router.go(btn.dataset.mode))
         );
+        const essayBtn = $("#go-essay");
+        if (essayBtn) essayBtn.addEventListener("click", () => Router.go("essay-menu"));
     }
 
     /* §6 — FLASHCARD MODE ------------------------------------ */
