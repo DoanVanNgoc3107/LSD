@@ -5,36 +5,260 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#0f172a" />
-    <meta name="description"
-        content="BrainBooster - Hệ thống ôn luyện trắc nghiệm Lịch sử Đảng với nhiều chế độ học theo khoa học ghi nhớ." />
-    <title>Lịch sử Đảng</title>
+    <meta name="description" content="BrainBooster - Lời tri ân gửi tới các bạn sinh viên đã đồng hành cùng hệ thống ôn luyện trắc nghiệm Lịch sử Đảng." />
+    <title>Lời Tri Ân - BrainBooster</title>
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="app.css" />
+    <style>
+        /* ==========================================================================
+           1. HỆ BIẾN MÀU & THIẾT LẬP CHUẨN UX/UI
+           ========================================================================== */
+        :root {
+            --bg-main: #0f172a;               /* Màu nền hệ thống (Slate 900) */
+            --bg-card: rgba(30, 41, 59, 0.7);  /* Kính mờ trong suốt (Slate 800) */
+            --border-color: rgba(255, 255, 255, 0.08); /* Viền mỏng cao cấp */
+            --text-primary: #f8fafc;          /* Chữ chính (Slate 50) */
+            --text-secondary: #94a3b8;        /* Chữ phụ (Slate 400) */
+            --text-muted: #64748b;            /* Chữ chú thích (Slate 500) */
+            --accent-color: #38bdf8;          /* Màu nhấn công nghệ (Sky 400) */
+            --gradient-text: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Khung bọc căn chỉnh toàn màn hình mượt mà */
+        .page-wrapper {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            padding: 3rem 1.25rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        /* Hiệu ứng ánh sáng nền đổ bóng (Ambient Light Gradient) */
+        .bg-glow {
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.13) 0%, rgba(129, 140, 248, 0.04) 55%, transparent 100%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            pointer-events: none;
+            filter: blur(30px);
+        }
+
+        /* ==========================================================================
+           2. CẤU TRÚC CARD TRI ÂN (BO GÓC & ĐỔ BÓNG CHUẨN ĐẸP)
+           ========================================================================== */
+        .thank-you-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px; /* Bo góc mượt chuẩn UI Hiện đại */
+            padding: 3.5rem 3rem;
+            max-width: 580px;
+            width: 100%;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            
+            /* Hiệu ứng trồi lên mượt mà khi load trang */
+            animation: cardFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Badge thương hiệu phía trên */
+        .thank-you-card__eyebrow {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent-color);
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            padding: 0.4rem 1rem;
+            background: rgba(56, 189, 248, 0.08);
+            border-radius: 100px; /* Bo góc hoàn toàn cho badge nút */
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+
+        /* Tiêu đề chính phối chữ Gradient cao cấp */
+        .thank-you-card__title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2.25rem;
+        }
+
+        /* Khối nội dung được căn chỉnh độ rộng dòng tối ưu */
+        .thank-you-card__body {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            text-align: justify; /* Tối ưu hóa khối chữ cho ngay ngắn, sang trọng */
+        }
+
+        .thank-you-card__lead {
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+
+        .thank-you-card__body strong {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* Hộp thông điệp chúc mừng độc lập nhằm tăng tính tương tác thị giác */
+        .thank-you-card__wish {
+            text-align: center;
+            margin-top: 0.75rem;
+            color: #e2e8f0;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.25rem;
+            border-radius: 14px; /* Bo góc phụ phân cấp khối */
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Phần chân trang ký tên */
+        .thank-you-card__footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .signature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .signature__label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .signature__name {
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+        }
+
+        .signature__sub {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* ==========================================================================
+           3. HIỆU ỨNG CHUYỂN ĐỘNG & RESPONSIVE TRÊN MOBILE
+           ========================================================================== */
+        @keyframes cardFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .thank-you-card {
+                padding: 2.5rem 1.5rem;
+                border-radius: 20px;
+            }
+            
+            .thank-you-card__title {
+                font-size: 1.85rem;
+            }
+            
+            .thank-you-card__body {
+                font-size: 1rem;
+                text-align: center; /* Đưa về căn giữa trên mobile để tối ưu trải nghiệm cuộn và đọc dọc */
+            }
+            
+            .thank-you-card__lead {
+                font-size: 1.05rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Decorative background layers -->
-    <div class="bg-decor" aria-hidden="true">
-        <div class="bg-grid"></div>
-        <div class="bg-blob bg-blob--indigo"></div>
-        <div class="bg-blob bg-blob--emerald"></div>
+    <div class="page-wrapper">
+        <div class="bg-glow"></div>
+
+        <main class="thank-you-card">
+            <header>
+                <span class="thank-you-card__eyebrow">BrainBooster (BBD)</span>
+                <h1 class="thank-you-card__title">Cảm ơn bạn đã đồng hành cùng chúng mình!</h1>
+            </header>
+
+            <div class="thank-you-card__body">
+                <p class="thank-you-card__lead">
+                    Kỳ thi kết thúc học phần môn <strong>Lịch sử Đảng</strong> đã chính thức khép lại. Sự tin tưởng và đồng hành của bạn chính là động lực lớn nhất để mình tiếp tục hoàn thiện hệ thống.
+                </p>
+                <p class="thank-you-card__text">
+                    Đi qua những ngày tháng ôn luyện cao độ, mong rằng BBD đã phần nào giúp chặng đường chinh phục môn Lý luận Chính trị thời sinh viên của bạn trở nên nhẹ nhàng, thông suốt và hiệu quả hơn.
+                </p>
+                <p class="thank-you-card__wish">
+                    Xin chân thành cảm ơn và chúc bạn đạt được Điểm số thật cao như mong đợi! 🌟
+                </p>
+            </div>
+
+            <footer class="thank-you-card__footer">
+                <div class="signature">
+                    <span class="signature__label">Thân ái,</span>
+                    <span class="signature__name">Đoàn Văn Ngọc</span>
+                    <span class="signature__sub">Creator of BrainBooster</span>
+                </div>
+            </footer>
+        </main>
     </div>
-
-    <!-- App mount point: all UI is rendered here by app.js -->
-    <div id="app" class="app-root"></div>
-
-    <!-- Application logic -->
-    <script src="essay-data.js"></script>
-    <script src="essay.js"></script>
-    <script src="app.js"></script>
 </body>
 
 </html>

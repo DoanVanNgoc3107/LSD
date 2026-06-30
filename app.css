@@ -521,6 +521,87 @@ button {
     font-weight: 700;
     margin-bottom: 8px;
     position: relative;
+}
+
+/* Standalone thank-you page -------------------------------- */
+body {
+    display: grid;
+    place-items: center;
+    padding: clamp(20px, 5vw, 48px);
+    background:
+        radial-gradient(circle at top, rgba(99, 102, 241, 0.2), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(16, 185, 129, 0.16), transparent 30%),
+        var(--bg);
+}
+
+.thank-you {
+    width: min(760px, 100%);
+    padding: clamp(28px, 6vw, 56px);
+    border-radius: 28px;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(8, 12, 24, 0.84));
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
+    text-align: center;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    position: relative;
+    overflow: hidden;
+}
+
+.thank-you::before {
+    content: "";
+    position: absolute;
+    inset: auto -20% -45% auto;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: rgba(34, 211, 238, 0.12);
+    filter: blur(10px);
+}
+
+.thank-you > * {
+    position: relative;
+    z-index: 1;
+}
+
+.thank-you__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(34, 211, 238, 0.12);
+    color: var(--cyan);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.thank-you h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+    margin-bottom: 18px;
+}
+
+.thank-you p {
+    color: var(--text-muted);
+    font-size: clamp(1rem, 2.2vw, 1.1rem);
+    max-width: 62ch;
+    margin: 0 auto 14px;
+}
+
+.thank-you__lead {
+    color: var(--text);
+}
+
+.thank-you__signature {
+    margin-top: 8px;
+    color: var(--emerald-bright);
+    font-weight: 700;
+}
     z-index: 1;
 }
 
